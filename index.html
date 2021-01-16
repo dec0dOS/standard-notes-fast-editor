@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_blank">
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+
+    <script src="dist/dist.js"></script>
+
+    <script src="dist/sn-codemirror-search/search.js"></script>
+    <script src="dist/sn-codemirror-search/searchcursor.js"></script>
+    <script src="dist/sn-codemirror-search/dialog/dialog.js"></script>
+
+    <link rel="stylesheet" media="all" href="dist/dist.css">
+    <link rel="stylesheet" media="all" href="dist/sn-codemirror-search/dialog/dialog.css">
+</head>
+
+<body>
+    <div id="wrapper">
+        <textarea id="code" name="code"></textarea>
+    </div>
+    <div class="modal micromodal-slide" id="modal-open-link">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div id="modal-container" class="modal__container" role="dialog">
+                <header id="modal-header" class="modal__header">
+                    <h2 class="modal__title">
+                        Open Link
+                    </h2>
+                </header>
+                <div id="modal-content-content" class="modal-content-content">
+                    <div id="modal-content" class="modal__content">
+                        <p>Do you want to open <a id="modal-link-description" class="cm-link"></a> ?</p>
+                    </div>
+                    <footer id="modal-footer" class="modal__footer">
+                        <button class="modal__btn" data-micromodal-close>CANCEL</button>
+                        <a id="modal-link-button" class="modal__btn">OPEN</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

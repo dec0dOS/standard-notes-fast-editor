@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_blank">
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+    <title>Fast Editor demo</title>
+
+    <script src="dist/dist.js"></script>
+
+    <script src="dist/sn-codemirror-search/search.js"></script>
+    <script src="dist/sn-codemirror-search/searchcursor.js"></script>
+    <script src="dist/sn-codemirror-search/dialog/dialog.js"></script>
+
+    <link rel="stylesheet" media="all" href="dist/dist.css">
+    <link rel="stylesheet" media="all" href="dist/sn-codemirror-search/dialog/dialog.css">
+</head>
+
+<body style="padding: 10px; box-sizing: border-box; max-width: 1200px">
+    <div id="wrapper" style="border: 2px solid black">
+        <textarea id="code" name="code" style="height: 100%">
+# Fast editor
+This is a demo of the Fast Editor for Standard Notes.
+
+You can type around and get a feel for it.
+
+# Vertical spacing
+Empty lines are small, giving you more control over spacing.
+
+There is a bit more space between lines compared to a basic plaintext editor.
+It's minor but helps with readability along with other features.
+
+# Indentation
+Press Tab to indent the current line by 2 spaces.
+Press Shift + Tab to de-indent the current line by 2 spaces.
+You can also just put spaces as you normally would.
+
+  These lines are indented (There are some spaces before the text)
+  Pressing Enter copies the indentation for the new line. (Try it!)
+
+  Lines wrap are indentation aware. You may notice that the wrapped part (after the line break) is shown with the same indentation as the first part. This is a long line to show that the text will end up wrapping when it reaches the end of the screen.
+  For indentation, in addition to spaces, you can also use:
+  * stars
+  - dashes
+  > greather than signs
+  + plus signs
+  ->*+ As long as they are before any other text, they are all considered part of indentation. So wrapped lines, like this one, are indented until after them. This is great for making lists. The font for these special indentation characters is fixed-width, so things always line up.
+  * When you press enter, the * - > + that are part of the indentation is also copied.
+
+# Numbered list
+
+1. When lines start a number, a dot and space will have the number and dot count as indentation
+  2. There can also be spaces before the number.
+  3. If you press enter on a line in a numbered list, the new line will copy the indentation and the number will be automatically incremented.
+  4. Try it, press enter here. The next line will be 5.
+  5. Other lines will not be automatically numbered, I feel this avoids it possibly doing too much. What if I really wanted to have two 5. ?
+
+# Headers
+Lines that start with a number sign (#) are headers, bolder, and bigger.
+They come in 3 sizes, by using up to 3 number signs
+ * # The big one! A single number sign.
+ * ## Headers can be indented, including after the usual *->+ characters!
+ * ### This one is just bold, not bigger. That's with 3 number signs.
+
+# Web addresses
+If something looks like a web address, then it is automatically highlighted.
+If it starts with http:// or https://
+  http://www.wikipedia.org/
+  https://www.google.com/search?q=more+complex+address
+
+When there are no https://, it tries to find addresses that have the common .com, .org, .io, etc
+  github.com/dec0dOS/standard-notes-fast-editor
+  standardnotes.org
+
+Lastly, you can ctrl+click on those links to open those pages in a new tab. Try it!
+
+# Paragraphs
+(This part about paragraph usually doesn't happen on mobile, because your screen is not large enough. Try it on a desktop!)
+
+You may have already noticed that lines that wrap don't go as far right as they could. The lines instead stop after around 50 characters. This avoids paragraph that is super large or long line followed by very few words, both harder to read. This usually has no effect on mobile because screens aren't as large. Also for that readability goal, lines that wrap have a little bit less space between the lines.
+You can see the little extra spacing between this line and the above paragraph.
+Note that lines that are not wrapping can end up longer than paragraphs. Depending on your screen, this line might be longer than the paragraph.
+-> This is useful if you mostly do lists with sometimes long lines.
+-> This avoids having a 2nd line with a single word; it will wrap a chunk of the line. Try adding words here until it warps!
+-> This can be changed in the setting
+
+**********-> Note that paragraphs' will be moved as a whole by indentation. The paragraph itself will have the same size as the other ones. So this paragraph's right side is further to the right than the one that is a few lines above. You can try adding/removing some of the stars at the beginning of this to see the whole paragraph moving with the indentation.
+
+# Code
+You can use `backticks` to have a piece of code in a line.
+The text will be highlighted a little using a different font (which is fixed-width).
+Additionally, another styling (such as headers) will not activate within a code or code block.
+
+You can use ``` triple backticks for code blocks. Put them at the end of a line (or as the only thing on the line) and code formatting will be applied until another line ends with triple backticks.
+So here is some code: ```
+    function hello() {
+        console.log("Hello world");
+        # Number signs don't make headers / big text in code blocks
+        # Also of note: Empty lines have a normal height
+
+    }
+```
+
+  * The background will start at the same indentation as the line with triple backticks: ```
+      function hello() {
+          console.log("Hello world");
+      }
+      ```
+      Or of the first line of code, whichever one is less indented:
+      ```
+    function hello() {
+      console.log("Hello world");
+    }
+```
+There is no syntax highlighting for code blocks, but you can specify a language name after the triple backticks:
+```javascript
+    console.log('no syntax highlighting, but compatible with markdown');
+```
+
+# Final notes
+All of this happens without modifying the text; you can always go back to a plain text file if you need to.
+
+This is still a work in progress:
+* Other simple features will be added to help with readability and usability.
+* Some things are not final and may be improved.
+
+# Install it!
+Now that you tried the editor, you can follow these instructions to install it in your Standard Notes:
+  https://github.com/dec0dOS/standard-notes-fast-editor#how-to-install (ctrl+click it)
+
+</textarea>
+    </div>
+    <div class="modal micromodal-slide" id="modal-open-link">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div id="modal-container" class="modal__container" role="dialog">
+                <header id="modal-header" class="modal__header">
+                    <h2 class="modal__title">
+                        Open Link
+                    </h2>
+                </header>
+                <div id="modal-content-content" class="modal-content-content">
+                    <div id="modal-content" class="modal__content">
+                        <p>Do you want to open <a id="modal-link-description" class="cm-link"></a> ?</p>
+                    </div>
+                    <footer id="modal-footer" class="modal__footer">
+                        <button class="modal__btn" data-micromodal-close>CANCEL</button>
+                        <a id="modal-link-button" class="modal__btn">OPEN</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

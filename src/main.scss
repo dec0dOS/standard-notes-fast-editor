@@ -1,0 +1,515 @@
+$comment-font-family: var(--sn-stylekit-monospace-font) !important;
+
+body,
+html {
+    font-family: var(--sn-stylekit-sans-serif-font);
+    font-size: var(--sn-stylekit-base-font-size);
+    height: 100%;
+    margin: 0;
+    background-color: transparent;
+}
+
+* {
+    // To prevent gray flash when focusing input on mobile Safari
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    // padding-right: 20px;
+}
+
+.CodeMirror-scroll {
+    padding: 8px;
+}
+
+.CodeMirror {
+    background-color: var(--sn-stylekit-editor-background-color) !important;
+    color: var(--sn-stylekit-editor-foreground-color) !important;
+    border: 0 !important;
+    font-family: var(--sn-stylekit-sans-serif-font);
+
+    -webkit-overflow-scrolling: touch;
+
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    font-size: var(--sn-stylekit-font-size-editor);
+    padding: 0;
+
+    z-index: 0;
+
+    .cm-comment {
+        background: var(--sn-stylekit-contrast-background-color);
+        color: var(--sn-stylekit-info-color);
+        font-family: $comment-font-family;
+        font-size: 95%; // font-family makes font look a bit big
+
+        &.CodeMirror-selectedtext {
+            color: var(--sn-stylekit-info-contrast-color) !important;
+            background: var(--sn-stylekit-info-color) !important;
+        }
+    }
+
+    .cm-link {
+        color: var(--sn-stylekit-info-color) !important;
+
+        &.CodeMirror-selectedtext {
+            color: var(--sn-stylekit-info-contrast-color) !important;
+            background: var(--sn-stylekit-info-color) !important;
+        }
+    }
+
+    .CodeMirror-linenumber {
+        color: gray !important;
+    }
+}
+
+.CodeMirror-cursor {
+    border-color: var(--sn-stylekit-editor-foreground-color);
+}
+
+.CodeMirror-gutters {
+    background-color: var(--sn-stylekit-background-color) !important;
+    color: var(--sn-stylekit-editor-foreground-color) !important;
+    border-color: var(--sn-stylekit-border-color) !important;
+}
+
+
+@mixin make-cm-header($number, $font-size) {
+    .cm-header-#{$number} {
+        font-weight: bold;
+        font-size: $font-size;
+    }
+
+    .cfg-color-headers .cm-header-#{$number} {
+        color: var(--sn-stylekit-info-color);
+    }
+
+    .cm-formatting-header-#{$number} {
+        opacity: 0.3;
+        font-size: 90%;
+
+        &::after {
+            content: '';
+            font-size: ($font-size / 0.9);
+        }
+    }
+}
+
+@include make-cm-header(1, 135%);
+@include make-cm-header(2, 120%);
+@include make-cm-header(3, 100%);
+@include make-cm-header(4, 100%);
+
+.colored-like-header {
+    color: var(--sn-stylekit-info-color);
+}
+
+.CodeMirror .blank-line {
+    line-height: 0.4em !important;
+}
+
+.CodeMirror {
+    font-size: 16px;
+}
+
+.CodeMirror pre.CodeMirror-line {
+    padding: 2px 0;
+    line-height: 1.2;
+}
+
+.CodeMirror pre.comment-block-line {
+    padding: 0;
+    line-height: normal;
+    font-family: $comment-font-family;
+}
+
+.cm-leadingspace {
+    font-family: var(--sn-stylekit-monospace-font);
+    // that smaller line-height avoids the font-change moving text that is after up and down when it is applied/removed.
+    line-height: 0.1;
+}
+
+.cm-tab {
+    // Need those to keep the wrapping system, which use text-indent, from inheriting to the tabs and making them 0 width
+    text-indent: 0;
+    padding: 0;
+}
+
+.cm-line-is-wrapped {
+    max-width: 50em;
+}
+
+.cm-line-is-wrapped.comment-block-line {
+    max-width: initial;
+}
+
+// When using contenteditable inputStyle (default on mobile), this is the styling for selection
+.CodeMirror-line::selection,
+.CodeMirror-line>span::selection,
+.CodeMirror-line>span>span::selection {
+    background: var(--sn-stylekit-info-color);
+    color: var(--sn-stylekit-info-contrast-color)
+}
+
+.CodeMirror-line::-moz-selection,
+.CodeMirror-line>span::-moz-selection,
+.CodeMirror-line>span>span::-moz-selection {
+    background: var(--sn-stylekit-info-color);
+    color: var(--sn-stylekit-info-contrast-color)
+}
+
+// When using textarea inputStyle (default on non-mobile), this is the styling for selection
+.CodeMirror-selected {
+    background: var(--sn-stylekit-info-color) !important;
+}
+
+.CodeMirror-selectedtext {
+    color: var(--sn-stylekit-info-contrast-color) !important;
+    background: var(--sn-stylekit-info-color) !important;
+}
+
+.CodeMirror.use-monospace-everywhere {
+    font-family: var(--sn-stylekit-monospace-font);
+}
+
+.CodeMirror.remove-longer-lines .CodeMirror-lines {
+    max-width: 50em;
+}
+
+#config-panel {
+    color: var(--sn-stylekit-editor-foreground-color) !important;
+}
+
+#config-panel a {
+    color: var(--sn-stylekit-info-color) !important
+}
+
+.cm-formatting-todo {
+    color: var(--sn-stylekit-danger-color);
+}
+
+.cm-formatting-todo-delegated {
+    color: var(--sn-stylekit-warning-color);
+}
+
+.cm-formatting-todo-backward {
+    color: var(--sn-stylekit-warning-color);
+}
+
+.cm-formatting-todo-complete {
+    text-decoration: line-through;
+    color: var(--sn-stylekit-neutral-color);
+}
+
+.cm-todo-complete {
+    text-decoration: line-through;
+    color: var(--sn-stylekit-neutral-color);
+}
+
+
+
+/**************************
+  Basic Modal Styles
+**************************/
+
+.modal {
+    font-family: var(--sn-stylekit-sans-serif-font) !important;
+}
+
+.modal__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal__container {
+    background-color: transparent;
+    padding: 0px;
+    max-width: 740px;
+    height: 75vh;
+    width: 50%;
+    border-radius: 0px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.modal__header {
+    position: relative;
+    display: block;
+    height: 30px;
+    margin-bottom: 0px;
+    padding: 30px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background: var(--sn-stylekit-editor-background-color) !important;
+}
+
+@supports (display: flex) {
+
+    .modal__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: initial;
+    }
+
+}
+
+.modal__title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    color: var(--sn-stylekit-editor-foreground-color) !important;
+    box-sizing: border-box;
+}
+
+.modal__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    margin: 0px;
+    padding: 0px;
+}
+
+@supports (display: flex) {
+
+    .modal__title {
+        position: static;
+    }
+
+    .modal__close {
+        position: static;
+    }
+
+}
+
+.modal__header .modal__close:before {
+    content: "\2715";
+}
+
+.modal-content-content {
+    padding: 30px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background: var(--sn-stylekit-editor-background-color) !important;
+}
+
+.modal__content {
+    margin: 0px 0px 20px 0px;
+    color: var(--sn-stylekit-editor-foreground-color) !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0px 20px 0px 0px;
+}
+
+.modal__content p {
+    margin-top: 0px;
+}
+
+.modal__btn {
+    font-size: .875rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    background-color: var(--sn-stylekit-editor-background-color) !important;
+    color: var(--sn-stylekit-editor-foreground-color) !important;
+    border-radius: .25rem;
+    border-style: none;
+    border-width: 0;
+    border-color: var(--sn-stylekit-editor-foreground-color) !important;
+    cursor: pointer;
+    -webkit-appearance: button;
+    text-transform: none;
+    overflow: visible;
+    line-height: 1.15;
+    margin: 0;
+    will-change: transform;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    text-decoration: none;
+    transform: translateZ(0);
+    transition: -webkit-transform .25s ease-out;
+    transition: transform .25s ease-out;
+    transition: transform .25s ease-out, -webkit-transform .25s ease-out;
+}
+
+.modal__btn-primary {
+    background-color: var(--sn-stylekit-editor-background-color) !important;
+    color: var(--sn-stylekit-editor-foreground-color) !important;
+}
+
+/**************************
+     Animation Style
+  **************************/
+
+@keyframes mmfadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes mmfadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes mmslideIn {
+    from {
+        transform: translateY(15%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes mmslideOut {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-10%);
+    }
+}
+
+.micromodal-slide {
+    display: none;
+}
+
+.micromodal-slide.is-open {
+    display: block;
+}
+
+.micromodal-slide[aria-hidden="false"] .modal__overlay {
+    animation: mmfadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="false"] .modal__container {
+    animation: mmslideIn .3s cubic-bezier(0, 0, .2, 1);
+}
+
+.micromodal-slide[aria-hidden="true"] .modal__overlay {
+    animation: mmfadeOut .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="true"] .modal__container {
+    animation: mmslideOut .3s cubic-bezier(0, 0, .2, 1);
+}
+
+.micromodal-slide .modal__container,
+.micromodal-slide .modal__overlay {
+    will-change: transform;
+}
+
+/**************************
+    Custom styles for individual modals
+  **************************/
+.modal__container button {
+    outline: none;
+    cursor: pointer !important;
+}
+
+.modal__container h2.modal__title {
+    color: var(--sn-stylekit-editor-foreground-color) !important;
+}
+
+.modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal__title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    color: var(--sn-stylekit-editor-foreground-color) !important;
+    box-sizing: border-box;
+}
+
+.modal__close {
+    font-size: 24px;
+}
+
+.modal__content {
+    color: var(--sn-stylekit-editor-foreground-color) !important;
+}
+
+.modal__btn {
+    padding: 10px 15px;
+    background-color: var(--sn-stylekit-editor-background-color) !important;
+    border-radius: 4px;
+    -webkit-appearance: none;
+}
+
+/**************************
+    Mobile custom styles for individual modals
+  **************************/
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+    .modal__container {
+        width: 90% !important;
+        min-width: 90% !important;
+    }
+
+    @supports (display: flex) {
+
+        .modal__container {
+            width: 90% !important;
+            min-width: 90% !important;
+            height: 85vh;
+        }
+
+    }
+
+    .modal__header {
+        padding: 20px;
+    }
+
+    .modal-content-content {
+        padding: 20px;
+    }
+
+    .modal__content {
+        -webkit-overflow-scrolling: touch;
+    }
+
+}

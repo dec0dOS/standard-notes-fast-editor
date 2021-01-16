@@ -1,0 +1,8 @@
+{
+    "identifier": "dev.dec0dOS.fast_editor_local_test",
+    "name": "Fast Editor local test",
+    "content_type": "SN|Component",
+    "area": "editor-editor",
+    "version": "0.1",
+    "url": "http://localhost:8080"
+}
