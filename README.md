@@ -7,6 +7,8 @@ This is the fork of [Indent Editor](https://github.com/ghedamat/standard-notes-i
 I enjoy using Standard Notes, it's an awesome open source project. I was really skeptical about Electron-based apps until I have started using Standard Notes. 
 The one thing that made me disappointed is that most of the editors don't have proper mobile support, so I've started to create my own editor. I've made many fixes and meaningless commits to test on the mobile so I have to clean up and reinitialize the repo.
 
+You could try the editor here: https://raw.githack.com/dec0dOS/standard-notes-fast-editor/master/demo.html
+
 Original Indent Editor features:
 * Press `Tab` to indent the line (or selected lines) with 2 spaces (even if in the middle of the line).
 * Press `Shift` + `Tab` removes 2 spaces from the beginning of the line (or selected lines).
