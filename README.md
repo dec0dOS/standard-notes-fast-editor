@@ -45,10 +45,10 @@ Fast Editor differences:
 * Pressing `Shift` + `Ctrl`+ `L ` adds markdown link to note. (You could use [standardnotes-fs](https://github.com/tannercollin/standardnotes-fs) with [foam](https://github.com/foambubble/foam) to utilize Zettelkasten method in Standard Notes) 
 * Pressing `Shift` + `Ctrl`+ `T` adds current date to the note. (Made by ghedamat)
 * Simple todo editor. 
-Type `=` at the beginning of the line to highlight the task.
-Type `/` at the beginning of the line to mark the task as delegated.
-Type `<`at the beginning of the line to postpone the task.
-Type `~` at the beginning of the line to mark the task as complete. Or you could use it to strikethrough any text in your notes.
+Type `=` at the beginning of the line to highlight the task.  
+Type `/` at the beginning of the line to mark the task as delegated.  
+Type `<`at the beginning of the line to postpone the task.  
+Type `~` at the beginning of the line to mark the task as complete. Or you could use it to strikethrough any text in your notes.  
 
 
 ### How to install
