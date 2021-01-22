@@ -1,5 +1,5 @@
 * Update dependencies (ncu -u)
-* Update version in package.json. Commit & push
+* Commit & push
 * On github, release the new version
 * In standard notes's extension file:
   * Update the "version"
